@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create product</title>
+</head>
+<body>
+<a th:href="@{/product/list}">back to list</a>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<div>
+    <form th:action="@{/product/create}" th:object="${productDto}" method="post">
+        <table>
+            <tr>
+                <th>id</th>
+                <th>
+                    <input type="text" th:field="*{id}">
+                </th>
+            </tr>
+            <tr>
+                <th>name</th>
+                <th>
+                    <input type="text" th:field="*{name}">
+                </th>
+            </tr>
+            <tr>
+                <th>description</th>
+                <th>
+                    <input type="text" th:field="*{description}">
+                </th>
+            </tr>
+            <tr>
+                <th>price</th>
+                <th>
+                    <input type="text" th:field="*{price}">
+                </th>
+            </tr>
+            <tr>
+                <th>image</th>
+                <th>
+                    <input type="text" th:field="*{image}">
+                </th>
+            </tr>
+            <tr>
+                <th>stock</th>
+                <th>
+                    <input type="text" th:field="*{stock}">
+                </th>
+            </tr>
+            <tr>
+                <th>category</th>
+                <th>
+                    <select th:field="*{category}">
+                        <option th:each="cat : ${categories}"
+                                th:value="${cat.id}"
+                                th:text="${cat.name}">
+                        </option>
+                    </select>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <input type="submit" value="create product">
+                </th>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>
