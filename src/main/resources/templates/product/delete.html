@@ -28,7 +28,9 @@
         </tr>
         <tr>
             <th>image</th>
-            <th th:text="${productDto.image}"></th>
+            <th>
+                <img th:src="@{'/img/' + ${productDto.image}}" width="100" height="100">
+            </th>
         </tr>
         <tr>
             <th>stock</th>

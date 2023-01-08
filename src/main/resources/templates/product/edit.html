@@ -10,7 +10,7 @@
     <p th:text="${message}"></p>
 </th:block>
 <div>
-    <form th:action="@{/product/edit}" th:object="${productDto}" method="post">
+    <form th:action="@{/product/edit}" th:object="${productDto}" method="post" enctype="multipart/form-data">
         <table>
             <tr>
                 <th>id</th>
@@ -39,7 +39,7 @@
             <tr>
                 <th>image</th>
                 <th>
-                    <input type="text" th:field="*{image}">
+                    <input type="file" th:field="*{image}">
                 </th>
             </tr>
             <tr>

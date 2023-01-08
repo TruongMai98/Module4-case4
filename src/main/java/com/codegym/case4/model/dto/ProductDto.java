@@ -2,25 +2,30 @@ package com.codegym.case4.model.dto;
 
 import com.codegym.case4.model.entity.Category;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 public class ProductDto {
     private Integer id;
     private String name;
     private String description;
     private double price;
-    private String image;
+    private MultipartFile image;
     private int stock;
     private Category category;
+
 
     public ProductDto() {
     }
 
-    public ProductDto(Integer id, String name, String description, double price, String image, int stock, Category category) {
+    public ProductDto(Integer id, String name, String description,
+                      double price, MultipartFile image,int stock,
+                      Category category) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.image = image;
+
         this.stock = stock;
         this.category = category;
     }
@@ -57,11 +62,11 @@ public class ProductDto {
         this.price = price;
     }
 
-    public String getImage() {
+    public MultipartFile getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(MultipartFile image) {
         this.image = image;
     }
 
@@ -80,4 +85,5 @@ public class ProductDto {
     public void setCategory(Category category) {
         this.category = category;
     }
+
 }

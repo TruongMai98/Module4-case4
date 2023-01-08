@@ -98,4 +98,18 @@ public class Product {
     public void setCategory(Category category) {
         this.category = category;
     }
+
+
+    public static class ProductBuilder {
+        private String name;
+        private String description;
+        private double price;
+        private String image;
+        private int stock;
+        private Category category;
+
+
+
+    }
+
 }

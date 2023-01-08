@@ -1,7 +1,8 @@
 //package com.codegym.case4.formatter;
 //
 //import com.codegym.case4.model.dto.CategoryDto;
-//import com.codegym.case4.service.category.ICategoryService;
+//
+//import com.codegym.case4.model.service.category.ICategoryService;
 //import org.springframework.format.Formatter;
 //import org.springframework.stereotype.Component;
 //

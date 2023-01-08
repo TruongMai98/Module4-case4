@@ -26,6 +26,11 @@ public class CategoryService implements ICategoryService{
                 .collect(Collectors.toList());
     }
 
+//    @Override
+//    public Iterable<Category> findAllCategory() {
+//        return categoryRepository.findAll();
+//    }
+
     @Override
     public Optional<CategoryDto> findById(Integer id) {
 //        Optional<Category> category = categoryRepository.findById(id);
@@ -33,6 +38,11 @@ public class CategoryService implements ICategoryService{
         Category category = categoryRepository.findById(id).orElse(null);
         return Optional.of(modelMapper.map(category, CategoryDto.class));
 
+    }
+
+    @Override
+    public Optional<Category> findByIdCategory(Integer id) {
+        return categoryRepository.findById(id);
     }
 
     @Override
