@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -33,7 +34,7 @@ public class SecurityConfiguration {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/static/**");
+        return (web) -> web.ignoring().antMatchers("/resources/**");
     }
 
     @Bean
@@ -49,13 +50,13 @@ public class SecurityConfiguration {
         // Pages require login with roles: ROLE_USER, ROLE_ADMIN.
         // If not login yet, redirect to /login
         http.authorizeHttpRequests()
-                .antMatchers("/", "/home", "/user/**","/product/list")
+                .antMatchers("/", "/home","/product/list/**")
                     .hasAnyRole("USER", "ADMIN");
 
         // Pages require login with role: ROLE_ADMIN.
         // If not login at admin role yet, redirect to /login
         http.authorizeHttpRequests()
-                .antMatchers("/role/**", "/product/**", "/category/**")
+                .antMatchers("/role/**", "/product/**", "/category/**", "/user/**")
                     .hasRole("ADMIN");
 
         // When user login with ROLE_USER, but try to
@@ -90,7 +91,8 @@ public class SecurityConfiguration {
 
     // Token stored in memory (of web server)
     public PersistentTokenRepository persistentTokenRepository() {
-        InMemoryTokenRepositoryImpl inMemoryTokenRepository = new InMemoryTokenRepositoryImpl();
-        return inMemoryTokenRepository;
+//        InMemoryTokenRepositoryImpl inMemoryTokenRepository = new InMemoryTokenRepositoryImpl();
+//        return inMemoryTokenRepository;
+        return new InMemoryTokenRepositoryImpl();
     }
 }

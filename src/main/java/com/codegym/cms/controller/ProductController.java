@@ -4,12 +4,14 @@ package com.codegym.cms.controller;
 import com.codegym.cms.model.dto.CategoryDto;
 import com.codegym.cms.model.dto.ProductDto;
 import com.codegym.cms.model.entity.Product;
+
 import com.codegym.cms.model.service.ICategoryService;
 import com.codegym.cms.model.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,7 +26,6 @@ public class ProductController {
     @Autowired
     private ICategoryService categoryService;
 
-
     @ModelAttribute("categories")
     public Iterable<CategoryDto> categories() {
         return categoryService.findAll();
@@ -32,7 +33,7 @@ public class ProductController {
 
     @GetMapping("/list")
     public ModelAndView listProduct(@PageableDefault(value = 5) Pageable pageable,
-                                    @RequestParam("search") Optional<String> search ) {
+                                    @RequestParam("search") Optional<String> search) {
         Page<Product> products;
         if (search.isPresent()) {
             products = productService.findAllByNameContaining(search.get(), pageable);
@@ -66,17 +67,17 @@ public class ProductController {
 
     @GetMapping("/edit/{id}")
     public ModelAndView showEditForm(@PathVariable Integer id) {
-       Optional<ProductDto> productDto = productService.findById(id);
+        Optional<ProductDto> productDto = productService.findById(id);
 
 //       Optional<Product> product = productService.findByIdProduct(id);
-       ModelAndView modelAndView;
-       if (productDto.isPresent()) {
-           modelAndView = new ModelAndView("/product/edit");
-           modelAndView.addObject("productDto", productDto.get());
-       } else {
-           modelAndView = new ModelAndView("/error-404");
-       }
-       return modelAndView;
+        ModelAndView modelAndView;
+        if (productDto.isPresent()) {
+            modelAndView = new ModelAndView("/product/edit");
+            modelAndView.addObject("productDto", productDto.get());
+        } else {
+            modelAndView = new ModelAndView("/error-404");
+        }
+        return modelAndView;
     }
 
     @PostMapping("/edit")

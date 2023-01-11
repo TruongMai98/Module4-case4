@@ -3,69 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <title>Create product</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 <body>
-<a th:href="@{/product/list}">back to list</a>
-<th:block th:if="${message}">
-    <p th:text="${message}"></p>
-</th:block>
+<nav>
+    <div th:insert="partials/navbar"></div>
+</nav>
 <div>
-    <form th:action="@{/product/create}" th:object="${productDto}" method="post" enctype="multipart/form-data">
-        <table>
-            <tr>
-                <th>id</th>
-                <th>
-                    <input type="text" th:field="*{id}">
-                </th>
-            </tr>
-            <tr>
-                <th>name</th>
-                <th>
-                    <input type="text" th:field="*{name}">
-                </th>
-            </tr>
-            <tr>
-                <th>description</th>
-                <th>
-                    <input type="text" th:field="*{description}">
-                </th>
-            </tr>
-            <tr>
-                <th>price</th>
-                <th>
-                    <input type="text" th:field="*{price}">
-                </th>
-            </tr>
-            <tr>
-                <th>image</th>
-                <th>
-                    <input type="file" th:field="*{image}">
-                </th>
-            </tr>
-            <tr>
-                <th>stock</th>
-                <th>
-                    <input type="text" th:field="*{stock}">
-                </th>
-            </tr>
-            <tr>
-                <th>category</th>
-                <th>
-                    <select th:field="*{category}">
-                        <option th:each="cat : ${categories}"
-                                th:value="${cat.id}"
-                                th:text="${cat.name}">
-                        </option>
-                    </select>
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    <input type="submit" value="create product">
-                </th>
-            </tr>
-        </table>
-    </form>
+    <div class="d-flex justify-content-center" >
+        <div style="width: 800px">
+            <a class="btn btn-outline-primary" th:href="@{/product/list}">back to list</a>
+            <th:block th:if="${message}">
+                <p th:text="${message}"></p>
+            </th:block>
+            <form th:action="@{/product/create}" th:object="${productDto}" method="post" enctype="multipart/form-data">
+                <table>
+                    <tr class="d-none">
+                        <th>id</th>
+                        <th>
+                            <input type="text" th:field="*{id}">
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="col-sm-2 col-form-label text-uppercase">Create product</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th class="col-sm-2 col-form-label">Name</th>
+                        <td class="col-sm-10">
+                            <input class="form-control" type="text" th:field="*{name}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="col-sm-2 col-form-label">Description</th>
+                        <td class="col-sm-10">
+                            <input class="form-control" type="text" th:field="*{description}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="col-sm-2 col-form-label">Price</th>
+                        <td class="col-sm-10">
+                            <input class="form-control" type="text" th:field="*{price}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="col-sm-2 col-form-label">Image</th>
+                        <td class="col-sm-10">
+                            <input type="file" th:field="*{image}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="col-sm-2 col-form-label">Stock</th>
+                        <td class="col-sm-10">
+                            <input class="form-control" type="text" th:field="*{stock}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="col-sm-2 col-form-label">Category</th>
+                        <td class="col-sm-5 form-select">
+                            <select th:field="*{category}">
+                                <option th:each="cat : ${categories}"
+                                        th:value="${cat.id}"
+                                        th:text="${cat.name}">
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-2 col-form-label"></td>
+                        <td class="col-sm-5">
+                            <input class="btn btn-primary" type="submit" value="Create product">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

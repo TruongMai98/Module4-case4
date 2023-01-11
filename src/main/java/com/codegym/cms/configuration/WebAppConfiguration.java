@@ -15,7 +15,8 @@ public class WebAppConfiguration implements WebMvcConfigurer {
     @Value("${upload.path}")
     private String fileUpload;
 
-
+    @Value("${css.path}")
+    private String cssPath;
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
@@ -24,6 +25,7 @@ public class WebAppConfiguration implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/img/**").addResourceLocations("file:" + fileUpload);
+//        registry.addResourceHandler("/aaaa/**").addResourceLocations("/static/css/login.css/");
 
     }
 }

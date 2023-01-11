@@ -3,9 +3,12 @@ package com.codegym.cms.controller;
 
 import com.codegym.cms.model.dto.CategoryDto;
 import com.codegym.cms.model.entity.Category;
+import com.codegym.cms.model.entity.Product;
 import com.codegym.cms.model.service.ICategoryService;
 import com.codegym.cms.model.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,6 +23,7 @@ public class CategoryController {
 
     @Autowired
     private IProductService productService;
+
     @GetMapping("/list")
     public ModelAndView listCategory() {
         return new ModelAndView("/category/list", "categories", categoryService.findAll());
@@ -80,5 +84,18 @@ public class CategoryController {
         return new ModelAndView("redirect:/category/list");
     }
 
+    @GetMapping("/view/{id}")
+    public ModelAndView viewCategory(@PathVariable("id") Integer id) {
+        Optional<CategoryDto> categoryOptional = categoryService.findById(id);
+        if (!categoryOptional.isPresent()) {
+            return  new ModelAndView("/error-404");
+        }
 
+        Iterable<Product> products = productService.findAllByCategory(categoryOptional.get());
+
+        ModelAndView modelAndView = new ModelAndView("/category/view");
+        modelAndView.addObject("categoryDto", categoryOptional.get());
+        modelAndView.addObject("products", products);
+        return modelAndView;
+    }
 }

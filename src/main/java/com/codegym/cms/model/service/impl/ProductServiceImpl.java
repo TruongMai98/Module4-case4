@@ -1,7 +1,9 @@
 package com.codegym.cms.model.service.impl;
 
 
+import com.codegym.cms.model.dto.CategoryDto;
 import com.codegym.cms.model.dto.ProductDto;
+import com.codegym.cms.model.entity.Category;
 import com.codegym.cms.model.entity.Product;
 import com.codegym.cms.model.repository.IProductRepository;
 import com.codegym.cms.model.service.IProductService;
@@ -87,4 +89,14 @@ public class ProductServiceImpl implements IProductService {
         productRepository.deleteById(id);
     }
 
+    @Override
+    public Iterable<Product> findAllByCategory(CategoryDto categoryDto) {
+        Category category = modelMapper.map(categoryDto, Category.class);
+        return productRepository.findAllByCategory(category);
+    }
+
+//    @Override
+//    public Iterable<Product> findAllByCategory(Category category) {
+//        return productRepository.findAllByCategory(category);
+//    }
 }

@@ -1,23 +1,34 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>View province</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<h1>View province: <span th:text="${category.name}"></span></h1>-->
-<!--<a href="/product/list">back to list</a>-->
-<!--<table border="1">-->
-<!--    <tr>-->
-<!--        <th>id</th>-->
-<!--        <th>name</th>-->
-<!--    </tr>-->
-<!--    <th:block th:each="product : ${products}">-->
-<!--        <tr>-->
-<!--            <td th:text="${product.id}"></td>-->
-<!--            <td th:text="${product.name}"></td>-->
-<!--        </tr>-->
-<!--    </th:block>-->
-<!--</table>-->
-<!--</body>-->
-<!--</html>-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View province</title>
+</head>
+<body>
+<h1>View province: <span th:text="${categoryDto.name}"></span></h1>
+<a href="/category/list">back to list</a>
+<table border="1">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Image</th>
+        <th>Stock</th>
+    </tr>
+    <th:block th:each="product : ${products}">
+        <tr>
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.description}"></td>
+            <td th:text="${product.price}"></td>
+            <td>
+                <img th:src="@{'/img/' + ${product.image}}" width="100" height="100">
+            </td>
+            <td th:text="${product.stock}"></td>
+        </tr>
+    </th:block>
+</table>
+
+</body>
+</html>
