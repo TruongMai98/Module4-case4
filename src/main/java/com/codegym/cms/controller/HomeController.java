@@ -14,11 +14,12 @@ public class HomeController {
 
     @Autowired
     private IUserRepository userRepository;
-
+//
     @GetMapping({ "/","/home"})
     public ModelAndView home() {
-        String name =  SecurityContextHolder.getContext().getAuthentication().getName();
-        return new ModelAndView("/index","username", userRepository.findByUsername(name).getUsername());
+//        String name =  SecurityContextHolder.getContext().getAuthentication().getName();
+//        return new ModelAndView("/index","username", userRepository.findByUsername(name).getUsername());
+        return new ModelAndView("/index");
     }
 
 }

@@ -81,7 +81,7 @@ public class CategoryController {
     @PostMapping("/delete")
     public ModelAndView deleteCategory(@ModelAttribute("categoryDto") CategoryDto categoryDto) {
         categoryService.remove(categoryDto.getId());
-        return new ModelAndView("redirect:/category/list");
+        return new ModelAndView("redirect:list");
     }
 
     @GetMapping("/view/{id}")

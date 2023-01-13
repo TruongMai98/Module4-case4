@@ -1,36 +1,61 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-  <meta charset="UTF-8">
-  <title>Create Role</title>
+    <meta charset="UTF-8">
+    <title>Create Role</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 <nav>
-  <div th:replace="partials/navbar"></div>
+    <div th:replace="partials/navbar"></div>
 </nav>
-<h1>Create Role</h1>
-<p>
-  <a th:href="@{/role/list}">Role List</a>
-</p>
-<th:block th:if="${message}">
-  <p th:text="${message}"
-     style="color:lightgreen;margin:10px 0px;"></p>
-</th:block>
-<form th:action="@{/role/create}" th:object="${roleDto}" method="post">
-  <table>
-    <tr>
-      <td>Description:</td>
-      <td><input type="text" th:field="*{desc}"/></td>
-    </tr>
-    <tr>
-      <td>Name:</td>
-      <td><input type="text" th:field="*{name}"/></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td><input type="submit" value="Create Role"></td>
-    </tr>
-  </table>
-</form>
+
+<div class="d-flex justify-content-center">
+    <div style="width: 800px">
+        <p>
+            <a class="btn btn-outline-primary" th:href="@{/role/list}">Role List</a>
+        </p>
+        <th:block th:if="${message}">
+            <p th:text="${message}"
+               style="color:lightgreen;margin:10px 0px;"></p>
+        </th:block>
+        <form th:action="@{/role/create}" th:object="${roleDto}" method="post">
+            <table>
+                <tr class="d-none">
+                    <th>id</th>
+                    <th>
+                        <input type="text" th:field="*{id}">
+                    </th>
+                </tr>
+                <tr>
+                    <th class="col-sm-3 col-form-label text-uppercase">Create role</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="col-sm-2 col-form-label">Description:</td>
+                    <td class="col-sm-10">
+                        <input class="form-control" type="text" th:field="*{desc}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-sm-2 col-form-label">Name:</td>
+                    <td class="col-sm-10">
+                        <input class="form-control" type="text" th:field="*{name}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-sm-2 col-form-label"></td>
+                    <td class="col-sm-10">
+                        <input class="btn btn-primary" type="submit" value="Create Role">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
 </body>
 </html>

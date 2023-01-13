@@ -43,14 +43,14 @@ public class RoleController {
     @GetMapping("/edit/{id}")
     public ModelAndView showEditForm(@PathVariable Integer id) {
         Optional<RoleDto> roleDto = roleService.findById(id);
+        ModelAndView modelAndView;
         if (roleDto.isPresent()) {
-            ModelAndView modelAndView = new ModelAndView("/role/edit");
+            modelAndView = new ModelAndView("/role/edit");
             modelAndView.addObject("roleDto", roleDto.get());
-            return modelAndView;
         } else {
-            ModelAndView modelAndView = new ModelAndView("/error-404");
-            return modelAndView;
+            modelAndView = new ModelAndView("/error-404");
         }
+        return modelAndView;
     }
 
     @PostMapping("/edit")
@@ -65,14 +65,14 @@ public class RoleController {
     @GetMapping("/delete/{id}")
     public ModelAndView showDeleteForm(@PathVariable Integer id) {
         Optional<RoleDto> roleDto = roleService.findById(id);
+        ModelAndView modelAndView;
         if (roleDto.isPresent()) {
-            ModelAndView modelAndView = new ModelAndView("/role/delete");
+            modelAndView = new ModelAndView("/role/delete");
             modelAndView.addObject("roleDto", roleDto.get());
-            return modelAndView;
         } else {
-            ModelAndView modelAndView = new ModelAndView("/error-404");
-            return modelAndView;
+            modelAndView = new ModelAndView("/error-404");
         }
+        return modelAndView;
     }
 
     @PostMapping("/delete")

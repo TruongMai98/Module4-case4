@@ -52,8 +52,8 @@ public class ProductController {
 
     @PostMapping("/create")
     public ModelAndView saveProduct(@ModelAttribute("productDto") ProductDto productDto) {
-        productService.save(productDto);
         ModelAndView modelAndView = new ModelAndView("/product/create");
+        productService.save(productDto);
         modelAndView.addObject("productDto", new ProductDto());
         modelAndView.addObject("message", "created product");
         return modelAndView;
@@ -84,7 +84,7 @@ public class ProductController {
     public ModelAndView updateProduct(@ModelAttribute("productDto") ProductDto productDto) {
         productService.save(productDto);
         ModelAndView modelAndView = new ModelAndView("/product/edit");
-        modelAndView.addObject("product", productDto);
+        modelAndView.addObject("productDto", productDto);
         modelAndView.addObject("message", "product updated successfully");
         return modelAndView;
     }
@@ -104,7 +104,10 @@ public class ProductController {
 
     @PostMapping("/delete")
     public ModelAndView deleteProduct(@ModelAttribute("productDto") ProductDto productDto) {
-        productService.remove(productDto.getId());
-        return new ModelAndView("redirect:/product/list");
+        if (productDto != null) {
+            productService.remove(productDto.getId());
+            return new ModelAndView("redirect:/product/list");
+        }
+        return new ModelAndView("redirect:list");
     }
 }

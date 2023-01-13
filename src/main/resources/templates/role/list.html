@@ -1,36 +1,46 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-  <meta charset="UTF-8">
-  <title>List Role</title>
+    <meta charset="UTF-8">
+    <title>List Role</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 <nav>
-  <div th:replace="partials/navbar"></div>
+    <div th:replace="partials/navbar"></div>
 </nav>
-<a th:href="@{/role/create}">Create Role</a>
-<h1>Roles</h1>
-<form>
+<a class="btn alert-primary" th:href="@{/role/create}">Create Role</a>
+
+<!--<form>
   Search by name:
   <input name="search" type="text"/>
   <input type="submit" value="Search"/>
-</form>
-<br/>
-<table border="1">
-  <tr>
-    <th>Description</th>
-    <th>Name</th>
-    <th>Edit</th>
-    <th>Delete</th>
-  </tr>
-  <th:block th:each="roleDto : ${roleDtos}">
-    <tr>
-      <td th:text="${roleDto.desc}"></td>
-      <td th:text="${roleDto.name}"></td>
-      <td><a th:href="@{/role/edit/__${roleDto.id}__ }">Edit</a></td>
-      <td><a th:href="@{/role/delete/__${roleDto.id}__ }">Delete</a></td>
-    </tr>
-  </th:block>
-</table>
+</form>-->
+
+<div class="row">
+    <div class="col-12">
+        <table class="table table-bordered">
+            <tr>
+                <th scope="col" class="col-1">Description</th>
+                <th scope="col" class="col-1">Name</th>
+                <th scope="col" class="col-1">Action</th>
+            </tr>
+            <th:block th:each="roleDto : ${roleDtos}">
+                <tr>
+                    <td th:text="${roleDto.desc}"></td>
+                    <td th:text="${roleDto.name}"></td>
+                    <td>
+                        <a type="button" class="btn btn-success text-light" th:href="@{/role/edit/__${roleDto.id}__ }">Edit</a>
+                        <a type="button" class="btn btn-danger text-light" th:href="@{/role/delete/__${roleDto.id}__ }">Delete</a>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+</div>
+
 </body>
 </html>

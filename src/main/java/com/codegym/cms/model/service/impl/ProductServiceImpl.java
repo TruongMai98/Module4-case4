@@ -54,7 +54,7 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public Optional<ProductDto> findById(Integer id) {
         Product product = productRepository.findById(id).orElse(null);
-        return Optional.ofNullable(modelMapper.map(product, ProductDto.class));
+        return Optional.of(modelMapper.map(product, ProductDto.class));
 //        Optional<Product> product = productRepository.findById(id);
 //        return Optional.ofNullable(modelMapper.map(product.get(), ProductDto.class));
 
@@ -67,7 +67,7 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public void save(ProductDto productDto) {
-        if (!productDto.getImage().isEmpty()) {
+//        if (!productDto.getImage().isEmpty()) {
             MultipartFile multipartFile = productDto.getImage();
             String filename = multipartFile.getOriginalFilename();
             try {
@@ -78,10 +78,11 @@ public class ProductServiceImpl implements IProductService {
             Product product = modelMapper.map(productDto, Product.class);
             product.setImage(filename);
             productRepository.save(product);
-        } else {
-            Product product = modelMapper.map(productDto, Product.class);
-            productRepository.save(product);
-        }
+//        }
+//        else {
+//            Product product = modelMapper.map(productDto, Product.class);
+//            productRepository.save(product);
+//        }
     }
 
     @Override
